@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        JIRA_SITE = 'https://your-jira-instance.com'
-        JIRA_PROJECT = 'PROJECT-KEY'
+        JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
+        JIRA_PROJECT = 'uksas-support'
         JIRA_ISSUE_TYPE = 'Task'
         JIRA_TRANSITION = 'Done'
     }

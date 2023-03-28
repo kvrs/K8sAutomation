@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
-        JIRA_CREDENTIALS = credentials('JIRA_CREDENTIALS')
+        JIRA_CREDENTIALS = credentials('jircredentials')
         JIRA_PROJECT = 'uksas-support'
         JIRA_ISSUE_TYPE = 'Task'
         JIRA_TRANSITION = 'Done'

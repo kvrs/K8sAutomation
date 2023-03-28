@@ -32,6 +32,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Update JIRA Status') {
             steps {
                 script {

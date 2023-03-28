@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    
     environment {
         JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
         JIRA_CREDENTIALS = credentials('jircredentials')

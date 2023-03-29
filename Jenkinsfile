@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
-        JIRA_CREDENTIALS = credentials('testcred')
+#        JIRA_CREDENTIALS = credentials('testcred')
         JIRA_PROJECT = 'uksas-support'
         JIRA_ISSUE_TYPE = 'Task'
         JIRA_TRANSITION = 'Done'
@@ -12,7 +12,7 @@ pipeline {
         stage('Create JIRA Issue') {
             steps {
                 script {
-                    def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
+               #     def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
                     println("jiraAuth": +jiraAuth)
                     def jiraJson = """{
                         "fields": {
@@ -29,7 +29,7 @@ pipeline {
                             }
                         }
                     }"""
-                    def httpResponse = httpRequest authentication: jiraAuth, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: jiraJson, url: "${env.JIRA_SITE}/rest/api/latest/issue"
+                    def httpResponse = httpRequest authentication: testcred, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: jiraJson, url: "${env.JIRA_SITE}/rest/api/latest/issue"
                     def issueKey = new groovy.json.JsonSlurper().parseText(httpResponse.getContent()).key
                     println "Created JIRA issue ${issueKey}"
                 }

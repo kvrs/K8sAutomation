@@ -35,9 +35,8 @@ pipeline {
                                 }
                             }
                         }
-                    """ 
-    }
-}
+                    }"""
+                }
 
 // pipeline {
 //     agent any

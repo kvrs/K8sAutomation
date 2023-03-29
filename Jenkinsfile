@@ -13,6 +13,7 @@ pipeline {
             steps {
                 script {
                     def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
+                    println("jiraAuth": +jiraAuth)
                     def jiraJson = """{
                         "fields": {
                             "project": {

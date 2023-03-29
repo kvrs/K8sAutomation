@@ -29,7 +29,7 @@ pipeline {
                             }
                         }
                     }"""
-                    def httpResponse = httpRequest authentication: testcred, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: jiraJson, url: "${env.JIRA_SITE}/rest/api/latest/issue"
+                    def httpResponse = httpRequest authentication: jiraAuth, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: jiraJson, url: "${env.JIRA_SITE}/rest/api/latest/issue"
                     def issueKey = new groovy.json.JsonSlurper().parseText(httpResponse.getContent()).key
                     println "Created JIRA issue ${issueKey}"
                 }

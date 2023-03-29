@@ -6,7 +6,7 @@ env.Assignee = env.Assignee
 env.Labels = env.Labels
 env.email_id = 'snspmr@gmail.com'
 
-node("Linux")
+node("")
 {
     wrap([$class: 'BuildUser'])
     {

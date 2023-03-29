@@ -17,5 +17,4 @@ def jenkinsResponse = jenkinsHttp.get(path: "api/json")
 if (jenkinsResponse.status != 200) {
     throw new RuntimeException("Jenkins authentication failed")
 }
-
 println("Authentication successful!")

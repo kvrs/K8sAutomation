@@ -12,6 +12,30 @@ pipeline {
               sh "ls -ltr"
           }
         }
+        stage('Jira creation') {
+            steps {
+                script {
+                
+                    def jsonPayload = """
+                        {
+                            "fields": {
+                                "project": {
+                                    "key": "${env.JIRA_PROJECT}"
+                                },
+                                "summary": "${env.JIRA_SUMMARY}",
+                                "description": "${env.JIRA_DESCRIPTION}",
+                                "issuetype": {
+                                    "name": "${env.JIRA_ISSUE_TYPE}"
+                                },
+                                "reporter": {
+                                    "name": "${gitCommitAuthor}"
+                                },
+                                "assignee": {
+                                    "name": "${env.JIRA_ASSIGNEE}"
+                                }
+                            }
+                        }
+                    """ 
     }
 }
 

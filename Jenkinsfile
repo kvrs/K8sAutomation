@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
-#        JIRA_CREDENTIALS = credentials('testcred')
+//        JIRA_CREDENTIALS = credentials('testcred')
         JIRA_PROJECT = 'uksas-support'
         JIRA_ISSUE_TYPE = 'Task'
         JIRA_TRANSITION = 'Done'
@@ -12,7 +12,7 @@ pipeline {
         stage('Create JIRA Issue') {
             steps {
                 script {
-               #     def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
+//                    def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
                     println("jiraAuth": +jiraAuth)
                     def jiraJson = """{
                         "fields": {

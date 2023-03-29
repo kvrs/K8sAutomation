@@ -12,9 +12,22 @@ pipeline {
               sh "ls -ltr"
           }
         }
+        stage('jira_creation') {
+            steps {
+                script{
+                  def jenkins = jenkins.model.Jenkins.instance
+                  for (n in jenkins.nodes) {
+                  try {
+                    println("${n.nodeName}")
+                  } catch (Exception e) {
+                  println("Exception: ${e}")
+                  }
+                }
+            }
+        }
     }
 }
-        
+   
 //         stage('Jira creation') {
 //             steps {
 //                 script {

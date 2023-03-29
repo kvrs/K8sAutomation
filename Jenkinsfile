@@ -1,9 +1,9 @@
-env.Summary = env.Summary.trim()
-env.Description = env.Description.trim()
-env.Story_points = env.Story_points.trim()
-env.Issuetype = env.Issuetype.trim()
-env.Assignee = env.Assignee.trim()
-env.Labels = env.Labels.trim()
+env.Summary = env.Summary
+env.Description = env.Description
+env.Story_points = env.Story_points
+env.Issuetype = env.Issuetype
+env.Assignee = env.Assignee
+env.Labels = env.Labels
 env.email_id = 'snspmr@gmail.com'
 
 node("Built-In Node")

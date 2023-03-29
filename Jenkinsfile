@@ -12,6 +12,8 @@ pipeline {
               sh "ls -ltr"
           }
         }
+    }
+}
         
 //         stage('Jira creation') {
 //             steps {

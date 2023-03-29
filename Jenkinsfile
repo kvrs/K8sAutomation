@@ -40,7 +40,6 @@ pipeline {
                             }
                         }
                     """
-                    println("jsonPayload":+jsonPayload)
                     
                     // Send the HTTP request to create the JIRA issue
                     def response = httpRequest(

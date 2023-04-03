@@ -4,9 +4,9 @@ pipeline{
       stage('login server'){
          steps{
             sshagent(credentials:['newsshkey']){
-               sh 'ssh  -o StrictHostKeyChecking=no  cloud_user@3.101.30.226 uptime "whoami"'
-               sh 'git@github.com:kvrs/K8sAutomation.git cloud_user@54.183.168.67:${WORKSPACE}'
-               sh 'scp ${WORKSPACE}  -o StrictHostKeyChecking=no cloud_user@3.101.30.226:/test'
+               sh 'ssh  -o StrictHostKeyChecking=no -l cloud_user 3.101.30.226 uptime "whoami"'
+//                sh 'git@github.com:kvrs/K8sAutomation.git cloud_user@54.183.168.67:${WORKSPACE}'
+//                sh 'scp ${WORKSPACE}  -o StrictHostKeyChecking=no cloud_user@3.101.30.226:/test'
           }
         echo "success lgoin"
          }

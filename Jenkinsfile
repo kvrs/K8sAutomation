@@ -4,7 +4,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['my-ssh-key']) {
-                    sh 'ssh cloud_user@3.101.101.79 "cd /test && git clone https://github.com/kvrs/K8sAutomation.git"'
+                    sh 'ssh cloud_user@3.101.30.226 "cd /test && git clone https://github.com/kvrs/K8sAutomation.git"'
                     // other deployment tasks
                 }
             }

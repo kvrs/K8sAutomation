@@ -1,58 +1,48 @@
-pipeline{
-   agent any
-   stages{
-      stage('login server'){
-         steps{
-            sshagent(credentials:['newsshkey']){
-               sh 'ssh  -o StrictHostKeyChecking=no -l cloud_user 3.101.30.226 uptime "whoami"'
-//                sh 'git@github.com:kvrs/K8sAutomation.git cloud_user@54.183.168.67:${WORKSPACE}'
-//                sh 'scp ${WORKSPACE}  -o StrictHostKeyChecking=no cloud_user@3.101.30.226:/test'
-          }
-        echo "success lgoin"
-         }
-       }
-   }
+pipeline {
+    agent any
+    
+    environment {
+        JIRA_SITE = 'https://sekhar-voxs.atlassian.net'
+        JIRA_CREDENTIALS = credentials('testcred1')
+        JIRA_PROJECT = 'uksas-support'
+        JIRA_ISSUE_TYPE = 'Task'
+        JIRA_TRANSITION = 'Done'
+    }
+    stages {
+        stage('Create JIRA Issue') {
+            steps {
+                script {
+                    def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
+                    println("jiraAuth": +jiraAuth)
+                    def jiraJson = """{
+                        "fields": {
+                            "project": {
+                                "key": "${env.JIRA_PROJECT}"
+                            },
+                            "issuetype": {
+                                "name": "${env.JIRA_ISSUE_TYPE}"
+                            },
+                            "summary": "Example JIRA Issue",
+                            "description": "This is an example JIRA issue created by Jenkins pipeline",
+                            "assignee": {
+                                "name": "jira_user"
+                            }
+                        }
+                    }"""
+                    def httpResponse = httpRequest authentication: jiraAuth, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: jiraJson, url: "${env.JIRA_SITE}/rest/api/latest/issue"
+                    def issueKey = new groovy.json.JsonSlurper().parseText(httpResponse.getContent()).key
+                    println "Created JIRA issue ${issueKey}"
+                }
+            }
+        }
+        stage('Update JIRA Status') {
+            steps {
+                script {
+                    def jiraAuth = "${env.JIRA_CREDENTIALS}".split(':')
+                    def httpResponse = httpRequest authentication: jiraAuth, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: """{"transition": {"name": "${env.JIRA_TRANSITION}"}}""", url: "${env.JIRA_SITE}/rest/api/latest/issue/${issueKey}/transitions"
+                    println "Updated JIRA issue ${issueKey} status to ${env.JIRA_TRANSITION}"
+                }
+            }
+        }
+    }
 }
-
-// pipeline {
-//     agent any
-//     stages {
-//         stage('Build') {
-//             steps {
-//               checkout([$class: 'GitSCM', 
-//                 branches: [[name: '*/main']],
-//                 doGenerateSubmoduleConfigurations: false,
-//                 extensions: [[$class: 'CleanCheckout']],
-//                 submoduleCfg: [], 
-//                 userRemoteConfigs: [[url: 'https://github.com/kvrs/K8sAutomation.git']]])
-//               sh "ls -ltr"
-//           }
-//         }
-//     }
-// }
-   
-//         stage('Jira creation') {
-//             steps {
-//                 script {
-                
-//                     def jsonPayload = """
-//                         {
-//                             "fields": {
-//                                 "project": {
-//                                     "key": "${env.JIRA_PROJECT}"
-//                                 },
-//                                 "summary": "${env.JIRA_SUMMARY}",
-//                                 "description": "${env.JIRA_DESCRIPTION}",
-//                                 "issuetype": {
-//                                     "name": "${env.JIRA_ISSUE_TYPE}"
-//                                 },
-//                                 "reporter": {
-//                                     "name": "${gitCommitAuthor}"
-//                                 },
-//                                 "assignee": {
-//                                     "name": "${env.JIRA_ASSIGNEE}"
-//                                 }
-//                             }
-//                         }
-//                   """
-//        }

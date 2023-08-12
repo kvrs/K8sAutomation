@@ -6,4 +6,4 @@ gcloud container clusters create $my_cluster --zone $my_zone --num-nodes 3 --ena
 
 ## Modify GKE Cluster 
 
-gcloud container clusters ##resize $my_cluster --zone $my_zone --num-nodes 4 
+gcloud container clusters ## resize $my_cluster --zone $my_zone --num-nodes 4 

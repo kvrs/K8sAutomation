@@ -1,4 +1,4 @@
-              ### Deployment of GKE Cluster from Cloud Shell
+  ### Deployment of GKE Cluster from Cloud Shell
 
 # Deploy GKE Cluster (CLI)
 

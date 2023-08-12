@@ -7,3 +7,10 @@ gcloud container clusters create $my_cluster --zone $my_zone --num-nodes 3 --ena
 ## Modify GKE Cluster 
 
 gcloud container clusters resize $my_cluster --zone $my_zone --num-nodes 4 
+
+
+## Connect to a GKE Cluster 
+
+gcloud container clusters get-credentials $my_cluster $my_zone
+
+above command creates a .Kube diectory in your home diectory 

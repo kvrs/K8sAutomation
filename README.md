@@ -6,12 +6,12 @@
 
 # Modify GKE Cluster 
 
-gcloud container clusters resize $my_cluster --zone $my_zone --num-nodes 4 
+``gcloud container clusters resize $my_cluster --zone $my_zone --num-nodes 4 ``
 
 
 # Connect to a GKE Cluster 
 
-gcloud container clusters get-credentials $my_cluster $my_zone
+``gcloud container clusters get-credentials $my_cluster $my_zone``
 
 above command creates a .Kube diectory in your home diectory if it doesn't already exists. in the .kube directory the command creates a file name config if it doesn't  already exist, which is used to store the authentication and configuration information.
 
@@ -33,7 +33,7 @@ kubectl get quota
 
 # use kubectl to deploy pods to GKE
 
-kubectl create deployment  --image my_nginx nginx-1
+``kubectl create deployment  --image my_nginx nginx-1``
 
 This command creates a Pod name my_nginx  with a container  running the nginx image. `` nginx-1 `` image is comes from either local or public docker registry.
 
@@ -50,7 +50,7 @@ kubectl cp test.html  my_nginx:/usr/share/nginx/html/test.html
 
 TO expose a Pod to clients outside the cluster requires a service.
 
-kubectl expose pod my_nginx --port 80 --type LoadBalancer
+``kubectl expose pod my_nginx --port 80 --type LoadBalancer``
 
 kubectl get services (svc)
 
